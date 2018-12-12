@@ -1,8 +1,11 @@
 package com.zyb.kotlinlearn
 
+import android.annotation.TargetApi
+import android.os.Build
 import android.os.Build.VERSION_CODES.M
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import kotlinx.android.synthetic.main.activity_main.*
 import org.jetbrains.anko.toast
@@ -67,13 +70,106 @@ class MainActivity : AppCompatActivity() {
 
         var litString: String = ""
 
+        //////////////////////
+        //遍历
+        /////////////////////
+
         //for in遍历
         for (item in stmutable) {
-            litString = "$litString,$item${item.length}\n"  //\n是换行符
+            litString = "$litString,$item${item.length}\n"  //\n是换行符 如果拼接需要运算的话,需要进行{}包括
         }
 
         //迭代器的方式
+        val iterator = stateList.iterator()
+        var stringName: String = ""
+        while (iterator.hasNext()) {
+            val item = iterator.next()
+            stringName = "$stringName+$item"
+        }
+        Log.i("zhangyb", "迭代器显示拼接数据$stringName");
 
+
+        //forEach  是kotlin专属的 采用的是匿名函数的形式  ,内部是用it代替每个元素
+        var foreachString: String = ""
+        stmutable.forEach { foreachString = "$foreachString$it" }
+
+        //集合数组的问题Set  无法修改内部元素的值,无法删除指定位置的数据 . 不能通过下标获取指定的元素
+        //开发中主要使用队列List和映射Map
+
+        //List   add 添加元素,, set 修改元素 removeAt 删除指定元素  循环forin 迭代器  forEach 通过下标循环
+
+        for (i in stateList.indices) {
+            val item = stateList[i]
+        }
+
+        //MutableList  提供sort 系列进行排序  sortBy   sortByDescending按照指定条件降序排列
+
+
+        //1.语法,类型推断 :
+        var i = 15;
+        var stra = "asd"
+        //  val num 不可以变化
+        //函数
+        //  main 函数的入口   println
 
     }
+
+
+    //字符串的模板  字符串的拼接
+
+    var goodsMap :Map<String ,String> = mapOf("苹果" to "apple","香蕉" to "banana")
+    var goodsMap_2 :Map<String ,String> = mapOf(Pair("苹果","apple"), Pair("bannan","香蕉"))
+
+    //map  for_in   和迭代器   遍历和循环的队形都是一键值对.通过item.key item.value
+
+    //forEach
+    var desc=""
+    @TargetApi(Build.VERSION_CODES.N)
+    fun funset(strr: String, dd: String): String {
+        goodsMap.forEach{key,value -> desc="$desc desc}pingp "}
+
+        return ""
+    }
+
+
+    //单分支  可以直接有返回值
+    fun function2(aa:String):String{
+        tv_function_1.text= if(1==2) "dddd" else "eeee"
+
+
+
+        return ""
+    }
+
+    //多路分支
+
+    // 可以直接有返回值  类似于switch case
+    //可以case中的常量装换成变量
+    //
+
+    fun function3(aa:String):String{
+
+        var i=2
+        when (i){
+            0 ->"sssd"
+            1->"dddd"
+            else ->""
+
+        }
+
+
+        return ""
+    }
+
+
+
+
+
+
+
+
+
+
+
+
 }
